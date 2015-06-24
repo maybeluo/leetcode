@@ -1,4 +1,5 @@
 // Bracket Matching problem, use the idea of Stack.
+// Sense of greedy...
 // WA 2 times:
 //    1) ignore the matching must be continuous.
 //    2) ignore the situation when the input string is a perfect bracket matching
