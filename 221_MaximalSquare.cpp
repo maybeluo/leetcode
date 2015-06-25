@@ -1,4 +1,7 @@
 // WA 1 times because of ignoring L16.
+// Dynamic Programming:
+//  dp[i][j] :the max length of a square whose low-right corner is (i,j)
+//  dp[i][j] = min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]) + 1
 class Solution {
 public:
     int maximalSquare(vector<vector<char>>& matrix) {
