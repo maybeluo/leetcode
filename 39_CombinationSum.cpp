@@ -1,7 +1,7 @@
 // Maybe more elegant methods exists, ex. generation function. Try other methods after get all the problems done...
 // The solution below is enumeration.
 //   WA: because of putting L18 before L13
-//   TLE: unnecessary lines: L18 & L28
+//   TLE: unnecessary lines: L18 & L28. ">=" is essential, NOT ">"
 //   OLE: L27 was forgotten
 
 class Solution {
@@ -10,7 +10,7 @@ public:
     void dfs(vector< vector<int> > & ans, vector<int>& candidates, vector<int>& v, int pos, int tsum, int target){
         if( tsum > target )
             return;
-        if( tsum == target ) {
+        if( pos <= candidates.size() && tsum == target ) {
             vector<int> vt(v);
             ans.push_back(vt);
             return ;
