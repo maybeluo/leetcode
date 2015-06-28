@@ -1,7 +1,8 @@
 // Maybe more elegant methods exists, ex. generation function. Try other methods after get all the problems done...
 // The solution below is enumeration.
-//   WA: because of putting L17 before L12
-//  TLE: unnecessary lines: L18 & L28
+//   WA: because of putting L18 before L13
+//   TLE: unnecessary lines: L18 & L28
+//   OLE: L27 was forgotten
 
 class Solution {
 public:
