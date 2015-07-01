@@ -1,4 +1,4 @@
-// L88-91.
+// 1A. L88-91 to remove the leading '0'.
 
 #include <iostream>
 #include <string>
