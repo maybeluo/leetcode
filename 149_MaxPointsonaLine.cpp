@@ -1,4 +1,4 @@
-// Time complexity: O(N^2*logN)
+// Version 1: Time complexity: O(N^2*logN)
 // Fixed one point, sort other point by the slope with respect to the fixed point.
 // WA 1 times: L34 is essential when there are only points duplicate with the given point.
 
@@ -40,6 +40,39 @@ public:
                     if( vt[p] != vt[p + 1]) break;
                 }
                 mx = max(mx, p - k + 1 + smp);
+            }
+        }
+        
+        return mx;
+    }
+};
+
+// Version 2:Time complexity: O(N^2) using unordered_map, 
+// unordered_map: average complexity of mmultiple elements insertion is: linear in the number of elements inserted.
+class Solution {
+public:
+    int maxPoints(vector<Point>& points) {
+        int n = points.size();
+        if(n <= 1) return n;
+        
+        int mx = 0, smp = 0;
+        const double maxSlope = 1e50;//parrel with y axis
+        
+        unordered_map<float, int> slope;
+        for(int i = 0; i < n; i++) {
+            int x0 = points[i].x, y0 = points[i].y;
+            smp = 0;
+            slope.clear();
+            
+            for(int j = i; j < n; j++){
+                if( points[j].x == x0 && points[j].y == y0 ) smp ++;
+                else if( points[j].x == x0 ) slope[maxSlope] ++;
+                else slope[ (points[j].y - y0)*1.0/(points[j].x - x0) ] ++;
+            }
+            mx = max(mx, smp);
+            
+            for(unordered_map<float, int>::iterator it = slope.begin(); it != slope.end(); it++){
+                mx = max(mx, it->second + smp);
             }
         }
         
