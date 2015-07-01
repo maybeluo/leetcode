@@ -1,6 +1,6 @@
 // Simulation. When the reminders start to duplicate, then the fraction recur.
 // It still takes me three hours to implement the code even AFTER I read the solution.
-// My implemention is ugly, because of putting L52-54 before L56, which can't handle condition like 1/6.
+// My implemention is ugly, because of putting L52-54 before L56, which can't handle conditions like 1/6.
 // See better solution here: http://blog.csdn.net/u012162613/article/details/41998617
 
 #include <iostream>
