@@ -2,7 +2,7 @@
 //    a) NULL
 //    b) Only one node
 //    c) Two nodes
-// TLE: L46 & L49. "if", NOT "while"
+// TLE: L46 & L49. "if", NOT "while". !!! Still wrong here when I write it again.
 // WA: L34: "p != NULL && q != NULL", WITHNOT " -> next". Think carefully before choosing between "p->next != NULL" and "p != NULL"
 
 /**
