@@ -30,18 +30,18 @@ public:
                     fst = 1; // first occurrence
                 }
                 if(fst) {
-                    // try to reduce the window size
-                	while( j <= i ) {
-	                    b = s[j];
-	                    if( flag_t[b] > 0 && (flag_s[b] - 1 < flag_t[b]) ) break;
-	                    flag_s[b] --;
-	                    j ++;
-	                }
+                  // try to reduce the window size
+        					while( j <= i ) {
+                    b = s[j];
+                    if( flag_t[b] > 0 && (flag_s[b] - 1 < flag_t[b]) ) break;
+                    flag_s[b] --;
+                    j ++;
+                	}
 	                // smaller window is founded
 	                if(dw > i - j + 1) {
 		                pos = j;
 		                dw = i - j + 1;
-		            }
+	            		}
                 }
             }
             i ++;
