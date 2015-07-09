@@ -1,4 +1,5 @@
-// TLE before adding L28 & L36
+// TLE before adding L29 & L37
+// Hash !!! use space to save time.
 
 class Solution {
 public:
