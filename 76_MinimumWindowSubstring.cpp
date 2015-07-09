@@ -31,7 +31,7 @@ public:
                 }
                 if(fst) {
                   // try to reduce the window size
-        					while( j <= i ) {
+									while( j <= i ) {
                     b = s[j];
                     if( flag_t[b] > 0 && (flag_s[b] - 1 < flag_t[b]) ) break;
                     flag_s[b] --;
