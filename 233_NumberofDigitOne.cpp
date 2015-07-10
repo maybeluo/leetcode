@@ -12,7 +12,7 @@ LL dfs(LL m, LL base) {
     return 1;
   }
   LL ans = 0;
-  if( m/base >= 1 ) { // base my bigger than m! eg. 1011/1000
+  if( m/base >= 1 ) { // base may bigger than m! eg. 1011/1000 = 11, 11/100
     if(m/base > 1)
       ans += base;
     else
