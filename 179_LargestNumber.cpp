@@ -18,9 +18,9 @@ struct compare {
                 else if(first[i % a] < second[i % b]) return false;
                 else i++;
             }
-            // Only one condition can step here: first is a part of second string, or conversely.
+            // Only under one condition the program can step here: first is a part of second string, or conversely.
             // i.e. first = "ab....c", second = "ab...cab...cab...cab"
-            // the value "p" in the following the the reminder of the longer string when remove the recurrent part of shorter string.
+            // the value "p" in the following is the reminder of the longer string when removing the recurrent part of shorter string.
             if(a < b) {
             	string t = "";
             	int p = i % a;
