@@ -12,8 +12,8 @@ public:
         
         vector<int> deg(numCourses, 0);
         for(int i = 0; i < ne; i++) {
-            vv[ prerequisites[i].first ].push_back( prerequisites[i].second );
-            deg[ prerequisites[i].second ] ++;
+            vv[ prerequisites[i].second ].push_back( prerequisites[i].first );
+            deg[ prerequisites[i].first ] ++;
         }
         
         vector<int> ans, vis;
