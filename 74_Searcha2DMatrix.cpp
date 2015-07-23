@@ -1,5 +1,3 @@
-//Diveide and Conquer.
-
 class Solution {
 public:
     bool dc(vector<vector<int>>& matrix, int x1, int y1, int x2, int y2, int target) {
@@ -7,10 +5,10 @@ public:
         int midx = (x1 + x2) >> 1, midy = (y1 + y2) >> 1;
         if( matrix[midx][midy] == target ) return true;
         else if( matrix[midx][midy] < target ) {
-            return dc(matrix, x1, midy + 1, midx, y2, target) || dc(matrix, midx + 1, y1, x2, y2, target);
+            return dc(matrix, midx, midy + 1, x2, y2, target) || dc(matrix, midx + 1, y1, x2, midy, target);
         }
         else {
-            return dc(matrix, x1, y1, x2, midy - 1, target) || dc(matrix, x1, midy, midx - 1, y2, target);
+            return dc(matrix, x1, y1, midx, midy - 1, target) || dc(matrix, x1, midy, midx - 1, y2, target);
         }
     }
     
