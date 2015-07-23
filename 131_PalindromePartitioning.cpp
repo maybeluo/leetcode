@@ -57,3 +57,42 @@ public:
         return vv;
     }
 };
+
+
+// Backtracking.
+class Solution {
+public:
+    bool isPalindrome(string&s, int l, int r) {
+        if(l > r) return false;
+        while(l < r) {
+            if(s[l++] != s[r--]) return false;
+        }
+        return true;
+    }
+    
+    void findPath(vector< vector<string> > & vv, vector<string>& path, int pos, string& s) {
+        if(pos == s.size()) {
+            vv.push_back(path);
+            return ;
+        }
+        for(int i = pos; i < s.size(); i++) {
+            if( isPalindrome(s, pos, i) ) {
+                path.push_back( s.substr(pos, i - pos + 1) );
+                findPath(vv, path, i + 1, s);
+                path.pop_back();
+            }
+        }
+    }
+    
+    vector<vector<string>> partition(string s) {
+        vector< vector<string> > vv;
+        vv.clear();
+        
+        vector<string> path;
+        path.clear();
+        
+        int pos = 0;
+        findPath(vv, path, pos, s);
+        return vv;
+    }
+};
