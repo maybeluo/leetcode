@@ -3,7 +3,7 @@
 
 class Solution {
 public:
-    int dfs(int n, int l, int r, vector< vector<int> >& vv) {
+    int dfs(int l, int r, vector< vector<int> >& vv) {
     	if(l >= r) {
     		if(l == r) vv[l][r] = 1;
     		return 1;
@@ -19,7 +19,7 @@ public:
     		else {
     			if(vv[l][i-1]) left = vv[l][i-1];
     			else {
-    				left = dfs(n, l, i-1, vv);
+    				left = dfs(l, i-1, vv);
     				vv[l][i-1] = left;
     			}
     		}
@@ -31,7 +31,7 @@ public:
     		else {
     			if(vv[i+1][r]) right = vv[i+1][r];
     			else {
-    				right = dfs(n, i+1, r, vv);
+    				right = dfs(i+1, r, vv);
     				vv[i+1][r] = right;
     			}
     		}
@@ -42,6 +42,6 @@ public:
     
     int numTrees(int n) {
     	vector< vector<int> > vv(n+1, vector<int>(n+1, 0));
-    	return dfs(n, 1, n, vv);
+    	return dfs(1, n, vv);
     }  
 };
