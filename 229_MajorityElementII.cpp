@@ -1,4 +1,5 @@
 // There are at most two elements that possibly have.
+// swap min first, then max.
 
 #include <iostream>
 #include <vector>
