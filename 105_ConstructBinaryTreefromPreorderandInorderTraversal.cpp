@@ -1,3 +1,5 @@
+// Key: get the boundry of postorder/preorder by calculate the number of elments in left/right sub-tree.
+
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
