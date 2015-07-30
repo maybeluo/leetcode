@@ -28,3 +28,29 @@ public:
         return ans;
     }
 };
+
+// version 2
+class Solution {
+public:
+
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> ans;
+        ans.clear();
+        
+        stack< TreeNode* > s;
+        TreeNode* p = root;
+        while( p != NULL || !s.empty() ) {
+            if( p != NULL ){
+                s.push(p);
+                p = p -> left;
+            }
+            else {
+                p = s.top();
+                ans.push_back(p -> val);
+                s.pop();
+                p = p -> right;
+            }
+        }
+        return ans;
+    }
+};
