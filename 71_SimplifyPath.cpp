@@ -1,29 +1,26 @@
+// first find out the substr between two '/', this is an easy way..
+
 class Solution {
 public:
     string simplifyPath(string path) {
         vector<string> ans;
-        ans.clear();
         
-        int n = path.size();
-        int i = 0, j = 0;
+        int n = path.size(), i = 0, d = 0;
         while(i < n) {
            while(i < n && path[i] == '/') i ++; // may multiple '/', take as one
            if(i >= n)   break;
            
-           int d = 0;
-           if(path[i] == '.') {
-               while(i + d < n && path[i + d] == '.' ) d ++;
-           }
-           if(i + d >= n || path[i + d] == '/') { // end of current dir name
-            if(d == 2 && !ans.empty()) ans.pop_back();
-           	if(d > 2) ans.push_back("/" + path.substr(i, d) );
-           	if(i + d >= n) break;
+           // handle the substr between two '/' is easy.
+           d = 0;
+           while(i + d < n && path[i + d] != '/' ) d ++;
+           if(d == 1 && path[i] == '.') {
            	i += d;
            	continue;
            }
-           
-           while(i + d < n && path[i + d] != '/') d ++;
-           ans.push_back( "/" + path.substr(i, d) );
+           else if(d == 2 && path.substr(i, d) == ".." ) {
+           	if(!ans.empty()) ans.pop_back();
+           }
+           else ans.push_back("/" + path.substr(i,d) );
            i += d;
         }
         
