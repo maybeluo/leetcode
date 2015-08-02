@@ -1,12 +1,40 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
+ // version 3. use POINTer to pointer to record the last data. L17, L4. L7 "(*last)", the "()" is necessary.
+ class Solution {
+public:
+    bool isBST(TreeNode* root, TreeNode** last) {
+        if(root != NULL) {
+            if( !isBST(root -> left, last) )    return false;
+            if( (*last) != NULL && (*last) -> val >= root -> val)  return false;
+            (*last) = root;
+            return isBST(root -> right, last);
+        }
+        return true;
+    }
+    
+    bool isValidBST(TreeNode* root) {
+        TreeNode* pre = NULL;
+        return isBST(root, &pre);
+    }
+};
+
+// version 2.
+class Solution {
+public:
+    bool isBST(TreeNode* root, TreeNode* low, TreeNode* up) {
+        if(root != NULL) {
+            if( (low != NULL && root -> val <= low -> val) || (up != NULL && root -> val >= up -> val) )
+                return false;
+            return isBST(root -> left, low, root) && isBST(root -> right, root, up);
+        }
+        return true;
+    }
+    
+    bool isValidBST(TreeNode* root) {
+        return isBST(root, NULL, NULL);
+    }
+};
+ 
+// version 1. use O(n) to record the inorder result.
 class Solution {
 public:
     void dfs(TreeNode* root, vector<int>& v) {
@@ -30,22 +58,5 @@ public:
             if(v[i] <= v[i-1]) return false;
         }
         return true;
-    }
-};
-
-// version 2.
-class Solution {
-public:
-    bool isBST(TreeNode* root, TreeNode* low, TreeNode* up) {
-        if(root != NULL) {
-            if( (low != NULL && root -> val <= low -> val) || (up != NULL && root -> val >= up -> val) )
-                return false;
-            return isBST(root -> left, low, root) && isBST(root -> right, root, up);
-        }
-        return true;
-    }
-    
-    bool isValidBST(TreeNode* root) {
-        return isBST(root, NULL, NULL);
     }
 };
