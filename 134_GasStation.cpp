@@ -35,3 +35,22 @@ public:
         
     }
 };
+
+// A more elegant solution: http://ask.julyedu.com/question/657
+class Solution {
+public:
+    int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
+        int n = gas.size();
+        int mx = 0x5fffffff, pos = -1, cnt = 0;
+        for(int i = 0; i < n; i++) {
+            cnt += (gas[i] - cost[i]);
+            if(cnt < mx) {
+                mx = cnt;
+                pos = i;
+            }
+        }
+        if(cnt < 0) return -1;
+        return (pos + 1)%n;
+        
+    }
+};
