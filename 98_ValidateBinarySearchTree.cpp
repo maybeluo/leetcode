@@ -32,3 +32,20 @@ public:
         return true;
     }
 };
+
+// version 2.
+class Solution {
+public:
+    bool isBST(TreeNode* root, TreeNode* low, TreeNode* up) {
+        if(root != NULL) {
+            if( (low != NULL && root -> val <= low -> val) || (up != NULL && root -> val >= up -> val) )
+                return false;
+            return isBST(root -> left, low, root) && isBST(root -> right, root, up);
+        }
+        return true;
+    }
+    
+    bool isValidBST(TreeNode* root) {
+        return isBST(root, NULL, NULL);
+    }
+};
