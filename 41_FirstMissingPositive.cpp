@@ -20,3 +20,23 @@ public:
         return ans + 1;
     }
 };
+
+// Same trap, wrong again line version 1 in L11.
+// L32 for avoiding swap same numbers again and again..
+class Solution {
+public:
+    int firstMissingPositive(vector<int> A) {
+        int n = A.size(), i = 0, j = 0;
+        while(i < n) {
+            if( (A[i] > 0 && A[i] <= n) 
+             && ( A[i] - 1 != i && A[i] != A[ A[i] - 1 ] ) ) {
+                swap( A[i], A[ A[i] - 1 ] );
+            }
+            else i ++;
+        }
+        for(i = 0; i < n; i++){
+            if(A[i] != i + 1) return i + 1;
+        }
+        return n + 1;
+    }
+};
