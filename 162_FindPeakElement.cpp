@@ -20,3 +20,21 @@ public:
         return dc(nums, 0, nums.size() - 1);
     }
 };
+
+// version 2
+class Solution {
+public:
+    int dc(vector<int>& A, int l, int r) {
+        if(l > r) return -1;
+        int mid = (l + r) >> 1;
+        int left = (mid - 1 >= 0) ? A[mid-1] : INT_MIN;
+        int right = (mid + 1) < A.size() ? A[mid + 1] : INT_MIN;
+        if(A[mid] > left && A[mid] > right) return mid;
+        else if(A[mid] > left) return dc(A, mid + 1, r);
+        else return dc(A, l, mid - 1);
+    }
+    
+    int findPeak(vector<int> A) {
+        return dc(A, 0, A.size() - 1);
+    }
+};
