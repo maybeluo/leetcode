@@ -24,3 +24,29 @@ public:
         return mx;
     }
 };
+
+// version 2.
+int maxDepth(TreeNode* root) {
+    if(root == NULL) return 0;
+    return 1 + max( maxDepth(root -> left) , maxDepth(root -> right) );
+}
+
+// version 3.
+int maxDepth(TreeNode* root) {
+    int depth = 0;
+    stack<pair<TreeNode*, int>> myStack;
+    myStack.push( make_pair(root, 0) );
+    
+    while( !myStack.empty() ) {
+        pair<TreeNode*, int> p = myStack.top();
+        myStack.pop();
+        if(p.first == NULL) depth = max(depth, p.second);
+        else {
+            myStack.push( make_pair(p.first -> left, p.second + 1) );
+            myStack.push( make_pair(p.first -> right, p.second + 1) );
+        }
+    }
+    
+    return depth;
+}
+
