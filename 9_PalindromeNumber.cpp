@@ -12,3 +12,16 @@ public:
         else return false;
     }
 };
+
+// version 2
+typedef long long LL;
+bool isPalindrome(int x) {
+	LL y = 0, a = x;
+	while(a > 0) {
+    	int b = a %10;
+    	y = y *10 + b;
+    	a /= 10;
+    }
+    if( x - y == 0) return true;
+    else return false;
+}
