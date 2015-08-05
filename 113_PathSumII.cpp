@@ -79,3 +79,29 @@ public:
         return vv;
     }
 };
+
+// version 2.
+void dfs(vector< vector<int> >& vv, vector<int>& v, TreeNode* root, int cnt, int target) {
+	if( root == NULL ) return ;
+	if( root -> left == NULL && root -> right == NULL ) {
+    	if( cnt + root -> val == target ) {
+        	vector<int> vt(v.begin(), v.end() );
+        	vt.push_back(root -> val);
+        	vv.push_back(vt);
+        }
+        return ;
+    }
+	v.push_back( root -> val );
+	dfs(vv, v, root -> left, cnt + root -> val, target );
+	dfs(vv, v, root -> right, cnt + root -> val, target );
+	v.pop_back();
+} 
+
+vector< vector<int> > pathSum( TreeNode* root, int sum) {
+	vector< vector<int> > vv;
+	vv.clear();
+	vector<int> v;
+	v.clear();
+	dfs(vv, v, root, 0, sum);
+	return vv;
+}
