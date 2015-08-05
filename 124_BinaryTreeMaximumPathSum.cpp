@@ -40,3 +40,20 @@ public:
         return mx;
     }
 };
+
+//version 2.
+// MUST return an value in L52!!!!
+int dfs(TreeNode* root, int mx) {
+	if(root == NULL) return 0;
+	int left = dfs(root -> left, mx);
+	int right = dfs(root -> right, mx);
+  int ret = max( root -> val, max(left + root -> val, right + root -> val) );
+  mx = max( mx, max(ret, left + right + root -> val) );
+	return ret; // must have an return value!!! otherwise, will return a random value and hard to debug
+}
+
+int maxPathSum( TreeNode *root) {
+	int mx = 0 - 0x7fffffff;
+	dfs(root, mx);
+	return mx;
+}
