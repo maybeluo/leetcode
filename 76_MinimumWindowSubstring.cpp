@@ -53,3 +53,38 @@ public:
             return s.substr(pos, dw);
     }
 };
+
+// a neat version 
+const int maxA = 257;
+
+bool isContains(int *a, int *b) {
+    for(int i = 0; i < maxA; i++) {
+    	if(a[i] < b[i]) return false;
+    }
+    return true;
+}
+
+string minWindow(string s, string t) {
+    int flagS[maxA], flagT[maxA];
+    memset(flagS, 0, maxA * sizeof(int));
+    memset(flagT, 0, maxA * sizeof(int));
+    int l = 0, r = 0, i = 0, mx = 0x3ffffff;
+    string ans = "";
+    for(i = 0; i < t.size(); i++)  flagT[ t[i] ] ++;
+    for(i = 0; i < s.size(); i++) {
+    	flagS[ s[i] ] ++;
+    	if( isContains(flagS, flagT) ) { // shrinkage window
+        	while(l <= i && isContains(flagS, flagT) ) {
+            	flagS[ s[l] ] --;
+            	l ++;
+            }
+            l --;
+            flagS[ s[l] ] ++;
+            if( i - l + 1 < mx ) {
+            	mx = i - l + 1;
+            	ans = s.substr(l, i - l + 1);
+            }
+        }
+    }
+    return ans;
+}
