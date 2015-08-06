@@ -77,3 +77,30 @@ public:
         return ans;
     }
 };
+
+// version 3.
+vector<int> postorderTraversal(TreeNode* root) {
+	vector<int> ans;
+	stack< pair<TreeNode*, int> > sk;
+	sk.push( make_pair(root, 0) );
+	while( !sk.empty() ) {
+		TreeNode* now = sk.top().first;
+		if(now == NULL) {
+			sk.pop();
+			continue;
+		}
+		switch( sk.top().second ++ ) {
+		case 0:
+			sk.push( make_pair(now -> left, 0) );
+			break;
+		case 1:
+			sk.push( make_pair(now -> right, 0) );
+			break;
+		case 2:
+			TreeNode* q = sk.top();
+			sk.pop();
+			ans.push_back(q -> val);
+		}
+	}
+	return ans;
+}
