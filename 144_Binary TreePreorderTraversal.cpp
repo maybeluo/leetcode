@@ -10,6 +10,23 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+ // a neat version
+ vector<int> preorderTraversal(TreeNode* root) {
+	vector<int> ans;
+	stack<TreeNode*> sk;
+	sk.push(root);
+	while( !sk.empty() ) {
+		TreeNode *p = sk.top();
+		sk.pop();
+		if(p == NULL) continue;
+		ans.push_back(p -> val);
+		sk.push(p -> right);
+		sk.push(p -> left); 
+	}
+	return ans;
+}
+ 
+ // an ugly version
 class Solution {
 public:
     vector<int> preorderTraversal(TreeNode* root) {
