@@ -35,3 +35,21 @@ public:
 
     }
 };
+
+// a neat version
+// "=" in L44 & L50.
+void nextPermutation(vector<int> & nums ) {
+	int n = nums.size(), i = 0, j = 0;
+	i = n - 1;
+	while( i - 1 >= 0 && nums[i-1] >= nums[i]) i --;// find first descending position
+	if( i <= 0) {// the whole array in descending order
+		reverse(nums.begin(), nums.end());
+		return;
+	}
+	j = n - 1;
+	while(j > i - 1 && nums[j] <= nums[i- 1]) j --;
+	swap(nums[i - 1] ,nums[j]);
+	int l = i, r = n - 1;
+	while(l < r) swap(nums[l++], nums[r--]);
+	return ;
+}
