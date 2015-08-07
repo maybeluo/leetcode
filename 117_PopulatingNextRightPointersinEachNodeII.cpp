@@ -15,10 +15,10 @@ void connect(TreeLinkNode* root) {
 			if(q -> left && q->right) q -> left -> next = q -> right;
 
 			TreeLinkNode *r = q -> next;
-				while(r && (r->left == NULL && r->right == NULL) ) r = r -> next;
-				if(r) {
-					if(q -> right) q -> right -> next = r -> left ? r -> left : r -> right;
-					else q -> left -> next = r -> left ? r -> left : r -> right;
+			while(r && (r->left == NULL && r->right == NULL) ) r = r -> next;
+			if(r) {
+				if(q -> right) q -> right -> next = r -> left ? r -> left : r -> right;
+				else q -> left -> next = r -> left ? r -> left : r -> right;
 			}
 			q = r;
 		}
@@ -27,3 +27,4 @@ void connect(TreeLinkNode* root) {
 	}
 	return ;
 }
+
