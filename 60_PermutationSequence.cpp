@@ -1,3 +1,4 @@
+// see solution here. https://leetcode.com/discuss/21027/sharing-my-straightforward-c-solution-with-explanation
 string getPermutation(int n, int k) {
 	vector<int> fact(n + 1, 1);
 	for(int i = 1; i <= n; i++) fact[i] = fact[i-1] * i;
