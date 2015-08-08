@@ -80,3 +80,33 @@ int main() {
 	return 0;
 }
 
+// another version
+string fractionToDecimal(int numerator, int denominator) {
+	string ans = "";
+	if(denominator == 0) return ans;
+
+	if( (numerator > 0 && denominator < 0) || (numerator < 0 && denominator > 0) ) ans += '-';
+	LL n = numerator, d = denominator, r = 0;
+	n = abs(n), d = abs(d);
+	
+	ans += numberToString(n/d);
+	n %= d;
+	if(n) ans += '.';
+	
+	string frac = "";
+	unordered_map<int, int> remindPos;
+	for(r = n%d; r != 0; r %= d) {
+		if( remindPos.find(r) != remindPos.end() ) {
+			frac.insert(remindPos[r], 1, '(');
+			frac += ')';
+			break;
+		}
+		// r coresponding to quoient of r*10/d
+		// thus, we store 'r' first, then get quoient r*10/d
+		remindPos[r] = remindPos.size() - 1;
+		r *= 10;
+		frac += numberToString(r/d);
+	}
+	return ans + frac;
+}
+
