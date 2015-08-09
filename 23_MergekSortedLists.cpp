@@ -1,4 +1,4 @@
-// Divide and conquer. O(m1*logm1 + m2*logm2 + m3*logm3...)
+// Divide and conquer. O(nk), assume each list has n elements exactly.
 // TLE many times: L39, L42. "if", not "while"
 
 /**
@@ -61,3 +61,51 @@ public:
         return dc(lists, 0, n-1);
     }
 };
+
+
+// not recurision, but change step: 2, 4, 8, 16, ...
+ListNode* merge2SortedLists(ListNode* head1, ListNode* head2) {
+	if(head1 == NULL) return head2;
+	if(head2 == NULL) return head1;
+	ListNode *p = head1, *q = head2, *r = NULL, *newHead = NULL;
+	if(head1 -> val < head2-> val) {
+		newHead = head1;
+		p = head1 -> next;
+	}
+	else{
+		newHead = head2;
+		q = head2 -> next;
+	} 
+	r = newHead;
+	while(p && q) {
+		if(p -> val < q -> val) {
+			r -> next = p;
+			r = p;
+			p = p -> next;
+		}
+		else{
+			r -> next = q;
+			r = q;
+			q = q -> next;
+		}
+	}
+	r -> next = p ? p : q;
+	return newHead;
+}
+
+ListNode* mergeKLists(vector<ListNode*> & lists) {
+	int n = lists.size(), h = 1;
+	if(n < 1) return NULL;
+	vector<int> vp;
+	while(h < n) {
+		h <<= 1;
+		vp.push_back(h);
+	}
+	for(int k = 0; k < vp.size(); k++) {
+		int step = vp[k];// 2^(k+1)
+		for(int i = 0; i < n; i+= step) {
+			if( i + step/2 < n ) lists[i] = merge2SortedLists(lists[i], lists[i + step/2]);
+		}
+	}
+	return lists[0];
+}
