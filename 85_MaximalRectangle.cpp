@@ -11,7 +11,7 @@ int largestRectangleArea(vector<int> & height) {
 		v.push_back( make_pair(height[i], i) );
 	}
 	while( !v.empty() ){
-		int left = (v.size() > 1) ? v[v.size() - 1].second : l;
+		int left = (v.size() > 1) ? v[v.size() - 2].second : l;
 		mx = max(mx, (r - left - 1)*v.back().first);
 		v.pop_back();
 	}
