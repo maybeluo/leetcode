@@ -52,3 +52,27 @@ class Solution {
         return ans;
     }
 };
+
+
+// a neat version
+class Solution {
+public:
+    int longestValidParentheses(string s) {
+        vector< pair<char, int> > v;
+        for(int i = 0; i < s.size(); i++) {
+            if( s[i] == ')' && (v.size() > 0 && v.back().first == '(' ) ) v.pop_back();
+            else {
+                v.push_back( make_pair(s[i], i) );
+            }
+        }
+        
+        int mx = 0, l = 0, r = s.size();
+        while( !v.empty() ) {
+            mx = max(mx, r - v.back().second - 1);
+            r = v.back().second;
+            v.pop_back();
+        }
+        mx = max(mx, r);
+        return mx;
+    }
+};
