@@ -1,4 +1,4 @@
-// Divide and conquer. O(nk), assume each list has n elements exactly.
+// Divide and conquer. O(n*k*lgk), assume each list has n elements exactly.
 // TLE many times: L39, L42. "if", not "while"
 
 /**
