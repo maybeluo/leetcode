@@ -39,3 +39,33 @@ public:
     }
 
 };
+
+// another version without using set and bitset
+void dfs(vector< vector<int> >& vv, vector<int>& nums, string s, int pos) {
+	if(pos == nums.size() ) {
+		vector<int> vt;
+		for(int i = 0; i < s.size(); i++) {
+		if(s[i] == '1') vt.push_back(nums[i]);
+		}
+		vv.push_back(vt);
+		return ;
+	}
+	int i = pos + 1;
+	while(i < nums.size() && nums[i] == nums[pos]) i ++;
+	for(int k = 0; k < i - pos; k++) { // i - pos
+		s[pos + k] = '1';
+		dfs(vv, nums, s, i);
+	}
+	for(int k = 0; k < i - pos; k++) s[pos + k] = '0';
+	dfs(vv, nums, s, i);
+}
+
+vector< vector<int> > subsetsWithDup( vector<int>& nums ) {
+	int n = nums.size();
+	sort(nums.begin(), nums.end());
+	string s(n, '0');
+	vector< vector<int> > vv;
+	dfs(vv, nums, s, 0);
+	return vv;
+}
+
