@@ -33,3 +33,16 @@ public:
             
     }
 };
+
+// another version
+int minSubArrayLen(int s, vector<int>& nums) {
+    int n = nums.size(), mx = n + 1, l = 0, r = 0, cnt = 0;
+    while(r < n) {
+        cnt += nums[r++];
+        while(l < r && cnt >= s) {
+            mx = min(mx, r - l);
+            cnt -= nums[l++];
+        }
+    }
+    return (mx == n + 1) ? 0 : mx;
+}
