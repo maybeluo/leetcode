@@ -65,3 +65,5 @@ int main()
     }
     return 0;
 }
+
+// see here: https://leetcode.com/discuss/25279/a-simple-c-solution-in-only-20-lines
