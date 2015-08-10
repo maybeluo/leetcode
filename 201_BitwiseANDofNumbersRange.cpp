@@ -30,6 +30,8 @@ public:
 };
 
 // another version
+// This solution just calculate the unchanged bit part juring the bitwise-and all numbers between m and n.
+// Because m and n is the min and max number in the range,so their unchanged part will be the same in other numbers in the range.
 int rangeBitwiseAnd(int m, int n) {
     int mask = ~0;
     while (mask && (m & mask) != (n & mask))
