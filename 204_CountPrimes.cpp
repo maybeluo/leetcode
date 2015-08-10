@@ -1,3 +1,5 @@
+// Time complexity: O(n*lgn*lgn)
+// see here:   https://en.wikipedia.org/wiki/Divergence_of_the_sum_of_the_reciprocals_of_the_primes
 class Solution {
 public:
     int countPrimes(int n) {
