@@ -66,3 +66,28 @@ int main()
     }
     return 0;
 }
+
+// use string instead of bitset
+void dfs(vector< vector<int> >& vv, vector<int>& nums, string s, int pos) {
+	if(pos == nums.size() ) {
+		vector<int> vt;
+		for(int i = 0; i < s.size(); i++) {
+			if(s[i] == '1') vt.push_back(nums[i]);
+		}
+		vv.push_back(vt);
+		return ;
+	}
+	dfs(vv, nums, s, pos + 1);
+	s[pos] = '1';
+	dfs(vv, nums, s, pos + 1);
+	s[pos] = '0';
+}
+
+vector< vector<int> > subsets( vector<int>& nums ) {
+	int n = nums.size();
+	sort(nums.begin(), nums.end());
+	string s(n, '0');
+	vector< vector<int> > vv;
+	dfs(vv, nums, s, 0);
+	return vv;
+}
