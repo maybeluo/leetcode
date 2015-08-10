@@ -52,7 +52,7 @@ int numDecodings(string s) {
 	dp[0] = 1;
 	for(int i = 1; i < n; i++) {
 		if( s[i] >= '1' && s[i] <= '9' ) { // can exist independly
-			dp[i] += dp[i-1];
+			dp[i] = dp[i-1];
 		}
 		if( (s[i-1] == '1' && ( s[i] >= '1' && s[i] <= '9' ) )
 			|| (s[i-1] == '2' && ( s[i] >= '1' && s[i] <= '6' ) ) ) {
