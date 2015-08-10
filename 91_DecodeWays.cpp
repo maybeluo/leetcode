@@ -38,3 +38,29 @@ public:
         return dp[n];
     }
 };
+
+// another version.
+// three conditions when add s[i]:
+//  1. s[i] can only exist independly    ==>    dp[i] = dp[i-1]
+//  2. s[i] can exist independly and can merge with s[i-1]    ==>    dp[i] = dp[i-1] + dp[i-2]
+//  3. s[i] can only exist bound with s[i-1]    ==>   dp[i] = dp[i-2]
+// 1&2 can write some conditions together.
+int numDecodings(string s) {
+	int n = s.size();
+	if(n < 1 || s[0] == '0') return 0;
+	vector<int> dp(n+1, 0);
+	dp[0] = 1;
+	for(int i = 1; i < n; i++) {
+		if( s[i] >= '1' && s[i] <= '9' ) { // can exist independly
+			dp[i] += dp[i-1];
+		}
+		if( (s[i-1] == '1' && ( s[i] >= '1' && s[i] <= '9' ) )
+			|| (s[i-1] == '2' && ( s[i] >= '1' && s[i] <= '6' ) ) ) {
+					dp[i] += ( (i > 1) ? dp[i-2] : 1);
+		}
+		if( s[i] == '0' && ( s[i-1] == '1' || s[i-1] == '2' ) ) { // can only bound with s[i-1]
+			dp[i] = (i > 1) ? dp[i-2] : 1;
+		}
+	}
+	return dp[n-1];
+}
