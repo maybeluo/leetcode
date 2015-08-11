@@ -1,3 +1,4 @@
+// see here for theory: https://en.wikipedia.org/wiki/Cycle_detection#Tortoise_and_hare
 /**
  * Definition for singly-linked list.
  * struct ListNode {
