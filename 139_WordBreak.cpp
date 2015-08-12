@@ -37,18 +37,14 @@ public:
         
         unordered_set<int> able;
         able.clear();
+        dp[0] = 1;
+        able.insert(0);
         for(int i = 0; i < n; i++) {
-            if( wordDict.find( s.substr(0, i + 1) ) != wordDict.end()  ) {
-                dp[i + 1] = 1;
-                able.insert(i + 1);
-            }
-            else {
-                for(unordered_set<int>::iterator it = able.begin(); it != able.end(); it++) {
-                    if(dp[*it] && wordDict.find( s.substr(*it, i - *it + 1) ) != wordDict.end() ) {
-                        dp[i + 1] = 1;
-                        able.insert(i+1);
-                        break; // only need to find a valid solution
-                    }
+            for(unordered_set<int>::iterator it = able.begin(); it != able.end(); it++) {
+                if(dp[*it] && wordDict.find( s.substr(*it, i - *it + 1) ) != wordDict.end() ) {
+                    dp[i + 1] = 1;
+                    able.insert(i+1);
+                    break; // only need to find a valid solution
                 }
             }
         }
