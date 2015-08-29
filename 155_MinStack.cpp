@@ -36,3 +36,38 @@ public:
         return v[ minPos.back() ];
     }
 };
+
+
+// another solution
+class MinStack {
+public:
+    MinStack() {
+        mx = 0x7fffffff;
+        while(!s.empty()) s.pop();
+    }
+    
+    void push(int x) {
+        mx = min(x, mx);
+        s.push( make_pair(x, mx) );
+    }
+
+    void pop() {
+        s.pop();
+        if(!s.empty())
+            mx = s.top().second;
+        else 
+            mx = 0x7fffffff;
+    }
+
+    int top() {
+        return s.top().first;
+    }
+
+    int getMin() {
+        return s.top().second;
+    }
+    
+private:
+    int mx;
+    stack< pair<int, int> > s;
+};
