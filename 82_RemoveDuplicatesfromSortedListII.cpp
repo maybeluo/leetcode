@@ -1,5 +1,3 @@
-// WA for neglecting L34.
-
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -11,27 +9,22 @@
 class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
-        if(head == NULL) return head;
-        ListNode* p = head, *q, *r;
-        int flag = 1;
-        head = NULL;
-        while(p != NULL) {
-            q = p->next;
-            while(q!=NULL && p->val == q->val){
-                q = q->next;
+        ListNode *current = head, *runner = head, *newHead = NULL, *follow = NULL;
+        while(current != NULL) {
+            runner = current -> next;
+            while(runner != NULL && runner -> val == current -> val) runner = runner -> next;
+            if(runner == current -> next) {
+                if(newHead == NULL) {
+                    newHead = current;
+                }
+                else {
+                    follow -> next = current;
+                }
+                follow = current;
+                follow -> next = NULL;
             }
-            if(flag && p->next == q) {
-                flag = 0; // head founded.
-                head = p;
-                r = p;
-            }
-            else if(p->next == q) {
-                r -> next = p;
-                r = p;
-            }
-            p = q;
+            current = runner;
         }
-        r -> next = NULL;
-        return head;
+        return newHead;
     }
 };
