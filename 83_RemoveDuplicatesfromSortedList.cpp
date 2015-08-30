@@ -15,7 +15,9 @@ public:
         while(p != NULL) {
             q = p->next;
             while( q!= NULL && p->val == q->val) {
+                ListNode *t = q;
                 q = q->next;
+                delete t;
             }
             p -> next = q;
             p = q;
