@@ -35,3 +35,45 @@ public:
         return dfs(head, n);
     }
 };
+
+
+
+// fast-slow pointer
+class Solution {
+public:
+    TreeNode* creatBST(ListNode *head, ListNode* end) {
+        if(head == NULL || end == NULL) return NULL;
+        if(head == end) {
+            TreeNode *p = (TreeNode*) malloc( sizeof(TreeNode) );
+            p -> val = head -> val;
+            p -> left = NULL;
+            p -> right = NULL;
+            return p;
+        }
+        bool flag = false;
+        ListNode *pre = head, *slow = head, *fast = head;
+        while(fast != end && fast -> next != end) {
+            if(flag) pre = pre -> next;
+            else flag = true;
+            slow = slow -> next;
+            fast = fast -> next -> next;
+        }
+        TreeNode* left = NULL, *right = NULL;
+        if(pre != slow) {
+            left = creatBST(head, pre);
+        }
+        right = creatBST(slow -> next, end);
+        TreeNode* root = (TreeNode*) malloc(sizeof(TreeNode));
+        root -> val = slow -> val;
+        root -> left = left;
+        root -> right = right;
+        return root;
+    }
+    
+    TreeNode* sortedListToBST(ListNode* head) {
+        ListNode* end = head;
+        while(end && end -> next) end = end -> next;
+        TreeNode* root = creatBST(head, end);
+        return root;
+    }
+};
