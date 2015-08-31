@@ -50,11 +50,10 @@ public:
             p -> right = NULL;
             return p;
         }
-        bool flag = false;
+        
         ListNode *pre = head, *slow = head, *fast = head;
         while(fast != end && fast -> next != end) {
-            if(flag) pre = pre -> next;
-            else flag = true;
+            pre = slow;
             slow = slow -> next;
             fast = fast -> next -> next;
         }
