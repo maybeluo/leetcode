@@ -29,9 +29,14 @@ public:
             if(pRight != NULL) {
                 return dfs(pRight);
             }
+            else 
+                return r;
         }
         else {
-            return dfs(root -> right);
+            if(root -> right != NULL)
+                return dfs(root -> right);
+            else
+                return NULL;
         }
     }
     
