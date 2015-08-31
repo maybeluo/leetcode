@@ -9,27 +9,20 @@
  */
 class Solution {
 public:
-    ListNode *detectCycle(ListNode *head) {
-        if(head == NULL) return NULL;
-        
-        ListNode* p = head, *q = head->next;
-        while(p != q) {
-            if(p == NULL || q == NULL)
-                return NULL;
-            if(q -> next != NULL)
-                q = q->next->next;
-            else
-                return NULL;
-            p = p -> next;
+    ListNode *detectCycle(ListNode* head) {
+    	ListNode *slow = head, *fast = head;
+    	while( fast && fast -> next ) {
+        	slow = slow -> next;
+        	fast = fast -> next -> next;
+        	if(slow == fast) break;
         }
+        if(fast == NULL || fast -> next == NULL) return NULL;
         
-        //find pointer in circle
-        p = p -> next;
-        q = head;
-        while(p != q){
-            p = p->next;
-            q = q->next;
+        slow = head;
+        while(slow != fast) {
+        	slow = slow -> next;
+        	fast = fast -> next;
         }
-        return p;
+        return slow;
     }
 };
