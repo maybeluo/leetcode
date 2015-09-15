@@ -89,3 +89,50 @@ int main() {
 	}
 	return 0;
 }
+
+// another version
+// solve the problem of "more than n/k times"
+class Solution {
+public:
+    vector<int> findMajorityK(vector<int> & nums, int k) {
+        unordered_map<int, int> mp;
+        mp.clear();
+        for(int i = 0; i < nums.size(); i++) {
+            if( mp.size() < k ) {
+                if(mp.find(nums[i]) == mp.end()) mp[ nums[i] ] = 1;
+                else mp[ nums[i] ] += 1;
+            }
+            else {
+                if(mp.find(nums[i]) == mp.end()) {
+                    for(pair<int,int> pr : mp) {// throw all the element in dict once
+                        mp[ pr.first ] = pr.second - 1;
+                    }
+                    unordered_map<int, int> tp;
+                    tp.clear();
+                    for(pair<int,int> pr : mp) {// only save element whose frequency larger than 0
+                        if( pr.second > 0 ) tp[pr.first] = pr.second;
+                    }
+                    mp = tp;
+                }
+                else {
+                    mp[ nums[i] ] += 1;
+                }
+            }
+        }
+        
+        vector<int> ans;
+        ans.clear();
+        for(pair<int,int> pr : mp) {
+            int cnt = 0;
+            for(int i = 0; i < nums.size(); i++) {
+                if( nums[i] == pr.first) cnt ++;
+            }
+            if(cnt > nums.size()/k) ans.push_back(pr.first); 
+        }
+        return ans;
+    }
+    
+    vector<int> majorityElement(vector<int>& nums) {
+        return findMajorityK(nums, 3);
+    }
+};
